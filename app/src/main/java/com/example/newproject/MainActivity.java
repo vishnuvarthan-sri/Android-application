@@ -29,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
         final EditText AGE = (EditText) findViewById(R.id.editTextNumber);
         RadioButton btn =(RadioButton) findViewById(R.id.radioButton);
         Button btt =(Button) findViewById(R.id.button);
-        EditText number =(EditText) findViewById(R.id.editTextNumber2);
+        final Button but =(Button)findViewById(R.id.button2);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        final EditText item=(EditText)findViewById(R.id.editTextNumber2);
+
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -53,13 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 msg3.show();
             }
         });
-
-    }
-    public void open(View view){
-        EditText number =(EditText) findViewById(R.id.editTextNumber2);
-        String num=number.getText().toString();
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure, You wanted to make decision"+num);
+        but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str4=item.getText().toString();
+                alertDialogBuilder.setMessage("Are you sure, You want"+str4);
                 alertDialogBuilder.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -67,17 +68,21 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
                             }
                         });
+                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
 
-        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-           @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
             }
         });
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
+
+
 
 
 
